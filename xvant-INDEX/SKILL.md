@@ -7,6 +7,8 @@ description: Use to see the xvant kit map — which skills exist, what each one 
 
 A curated, no-overlap toolset assembled from superpowers, gstack, the official Claude Code plugins, the bundled Anthropic skills, and Claude Code built-ins. Each `xvant-*` skill is one capability with a winning **spine** plus **grafted** modes from overlapping skills. Source skills are preserved (not edited) under `~/.claude/refs/`.
 
+**Repo:** https://github.com/Azrkiel/xvant — one commit per skill, fully reversible.
+
 ## Operating principles
 - **Skills compete at trigger time, not runtime.** Goal is trigger distinctness, not minimum file count. Each description uses distinct keywords; explicit-only skills say so.
 - **Spine + graft.** One winning base per skill; overlapping skills folded in as named modes; redundant ones dropped.
