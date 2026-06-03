@@ -17,31 +17,31 @@ Review changed code for correctness bugs and quality. Explicit-invoke only.
 When the concern is developer experience — API ergonomics, naming, onboarding friction, error messages — run the DX lens: `~/.claude/refs/gstack/devex-review/SKILL.md`.
 
 ## Deep review — swarm mode (explicit-invoke only)
-A deeper local pass above the base review. **Explicit-invoke only** — never self-fires; ask for it by name. Base `/code-review` stays the default. Free and fully local — no paid or cloud step.
+A deeper local pass above the base review. **Explicit-invoke only** — never self-fires; ask for it by name (`swarm`, "deep review", "swarm review"). Base `/code-review` stays the default. Free and fully local — no paid or cloud step.
 
-### Mode: swarm (local DIY fan-out)
-Honest scope: **fan-out without cloud-grade verification.** It produces independent opinions from zero-context reviewers, NOT externally-verified findings. Treat output as leads to confirm, not conclusions.
+**Honest scope:** swarm fans out zero-context reviewers that produce independent **opinions**, then partially verifies them. It is NOT cloud-grade verified-finding review. Confirmed findings are labeled by how they were confirmed; everything else is surfaced as **"suspected, unconfirmed."** Never dress an opinion up as a fact.
 
-Mechanism — reuse `xvant-execute`'s **parallel-dispatch** infra (`~/.claude/skills/xvant-execute/SKILL.md` → "Mode: parallel dispatch"), but point the agents at the **diff** with reviewer personas instead of implementer personas. Each runs in its own fresh context window:
-- `xvant-review-correctness` — logic, error handling, regressions
-- `xvant-review-security` — injection, authz, secret leakage, crypto misuse
-- `xvant-review-concurrency` — races, shared state, edge/boundary cases
-- `xvant-review-architecture` — coupling, layering, testability, API design
+**Through-line:** read once, run cheap checks before expensive ones, never verify the same thing twice.
 
-Agent files live in `~/.claude/agents/xvant-review-*.md`: scoped read-only tools (Read/Grep/Glob — no exec), pinned models — judgment lanes (correctness, architecture) on sonnet, pattern-scan lanes (security, concurrency) on haiku. Reviewers are breadth-cheap idea generators; trust comes from the verifier below, not the reviewer's model size. (Like the rest of the kit, the agents register after a Claude Code restart.)
+Run these six stages in THIS order — the ordering is the optimization, do not reorder:
 
-Collect findings, dedupe, then run the **tiered verifier**. Reviewers are read-only and never execute code — only tier 2 does, under isolation.
+1. **DIGEST (read once).** One pre-pass reads the diff a single time and emits a compact map (files, per-file change type, touched symbols, hunk ranges) — follow `~/.claude/skills/_shared/diff-digest.md`. Downstream agents get this digest plus only the hunks they need, never the full raw diff each.
+2. **FAN-OUT (parallel, fresh context).** Dispatch the four reviewer lenses concurrently via `~/.claude/skills/_shared/parallel-dispatch.md`, each a zero-context subagent returning **suspected findings only**:
+   - `xvant-review-correctness` — logic, error handling, regressions
+   - `xvant-review-security` — injection, authz, secret leakage, crypto misuse
+   - `xvant-review-concurrency` — races, shared state, edge/boundary cases
+   - `xvant-review-architecture` — coupling, layering, testability, API design; **always sees the whole diff** (the guaranteed catcher for cross-cutting issues). The other three get digest + their hunks.
+3. **DEDUP (before any verification).** Merge overlapping/duplicate findings across reviewers by a stable key (`file:line` + claim) so each suspect is investigated **once**, not N times.
+4. **BATCH TIER-1 (cheap, once).** Run the repo's EXISTING tooling a single time — test suite, typecheck, lint, build — and check the whole deduped list against that one run. Deterministic and trusted. Confirm or kill as many findings as possible here. No new code.
+5. **SELECTIVE TIER-2 (only what tier-1 could not reach).** Hand the still-open findings to `xvant-review-verifier`, high-severity first, **capped** (default 5; stop at the cap). It writes a minimal repro test per finding and runs it to confirm/refute.
+   > Tier-2 EXECUTES CODE. It must run in an **isolated git worktree** (`xvant-worktree`, or native Agent `isolation: "worktree"`) with a **sandboxed exec environment: NO secrets mounted, NO network**. Tier-2 must NEVER run without that isolation — if it can't be guaranteed, skip tier-2 and leave the finding "suspected, unconfirmed."
+6. **SYNTHESIZE (one final pass).** `xvant-review-verifier` produces the report: **tier-1-confirmed and tier-2-confirmed findings first, by severity**, each with its evidence; then everything unverifiable surfaced honestly as **"suspected, unconfirmed,"** naming the reviewer that raised it. No opinions dressed as facts.
 
-#### Tiered verifier
-Every claim gets the cheapest sufficient check; nothing is reported as fact until verified or labeled.
+**Agents** (`~/.claude/agents/xvant-review-*.md`; register after a Claude Code restart):
+- The four reviewers — read-only tools (Read/Grep/Glob), pinned to a **cheap** model: proposing candidates doesn't need the big model.
+- `xvant-review-verifier` — the only agent that executes code (Bash + worktree); pinned to the **expensive** model: tier-2 judgment and synthesis need it.
 
-- **Tier 1 — existing trusted tools (free, deterministic).** Run the repo's EXISTING tests / typecheck / lint / build against each claim. Anything a tier-1 tool can confirm or refute is settled here. No new code written.
-- **Tier 2 — isolated repro (only for findings tier 1 cannot reach).** Spawn a repro-writing verifier in an **isolated git worktree** (use `xvant-worktree`, or the native Agent `isolation: "worktree"`) with **sandboxed exec, NO secrets, and NO network**.
-  > Tier 2 EXECUTES CODE. It must never run outside that isolation — no secrets in the environment, no network egress, throwaway worktree discarded after. If isolation cannot be guaranteed, do NOT run tier 2: drop the finding to tier 3 instead.
-- **Tier 3 — unverifiable.** Anything tiers 1–2 cannot settle is surfaced explicitly labeled **"unverified opinion"**, naming the reviewer and its reasoning. Never present a tier-3 item as a confirmed bug.
-
-#### Report
-End with two clearly separated lists: **verified findings** (tier 1/2, each with its evidence) and **unverified opinions** (tier 3). Note which reviewer raised each. State the honest caveat plainly: swarm is independent opinion plus local verification (tiers 1–2), with tier-3 items clearly marked unverified.
+The fan-out and digest mechanics live in `_shared/` (referenced above), so `xvant-execute` can reuse the same infra without duplication.
 
 ## Acting on findings
 Fix Critical immediately, Important before proceeding, note Minor. Push back with technical reasoning if a finding is wrong for this codebase.

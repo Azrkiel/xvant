@@ -19,7 +19,7 @@ If you haven't run the verifying command in this message, you cannot claim it pa
 On a bare "done / is this finished / wrap up", run these in order (don't make the user invoke each):
 
 1. **Runtime check** — does it actually run/work? Use the built-in `/verify` (run the app/feature and observe real behavior), not just unit tests.
-2. **Code review** — invoke `xvant-review` on the diff. Fix Critical/Important before proceeding.
+2. **Code review** — invoke `xvant-review` on the diff. Fix Critical/Important before proceeding. At a pre-merge gate it MAY escalate to xvant-review's `swarm` mode for a deeper pass — explicit choice, never automatic on a bare "done".
 3. **Security pass** — invoke `xvant-security` on the change.
 4. **Cleanup pass** — invoke `xvant-simplify` for reuse/simplification.
 
