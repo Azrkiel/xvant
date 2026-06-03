@@ -29,7 +29,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 | xvant-execute ◆ | superpowers executing-plans | subagent-driven, parallel-dispatch, gstack pair-agent |
 | xvant-worktree | superpowers using-git-worktrees | — |
 | xvant-debug ◆ | superpowers systematic-debugging | triage, diagnose quick-path, gstack investigate |
-| xvant-review | built-in code-review | gstack devex-review (explicit-invoke only) |
+| xvant-review | built-in code-review | gstack devex-review; deep-review modes `swarm` (local zero-context multi-agent fan-out + tiered verifier) + `ultra` (cloud-verified `/code-review ultra`) — all explicit-invoke only |
 | xvant-review-exchange | superpowers requesting + receiving | merged send/receive modes |
 | xvant-verify | superpowers verification-before-completion | ORCHESTRATOR → runtime check → review → security → simplify |
 | xvant-security | built-in security-review | gstack cso (explicit-invoke only) |
@@ -58,6 +58,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 ## Collisions resolved
 - **End-of-task pile** (verify/review/security/simplify all fired on "done"): `xvant-verify` is the sole "done" trigger and sequences the other three; those three are explicit-invoke only.
 - **Session-end pair** (handoff vs retro): split by audience — `xvant-handoff` = machine-facing resume state; `xvant-retro` = human-facing lessons. Handoff links to retro, never duplicates reflection.
+- **Deep-review escalation** (deep review / ultrareview / swarm): answers the same "review my changes" trigger as `xvant-review`, so it was folded in as explicit `swarm` + `ultra` modes rather than a separate `xvant-ultrareview` skill (mirrors caveman lite→full→ultra) — avoids reintroducing the trigger collision the kit exists to prevent. Reviewer subagents live in `~/.claude/agents/xvant-review-*.md`.
 
 ## Dropped / excluded
 - `claude-api` (built-in) — pure passthrough, use the built-in directly.
