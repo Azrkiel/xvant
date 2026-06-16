@@ -2,7 +2,7 @@
 
 **One skill per moment. No overlap, no noise, fewer tokens.**
 
-xvant is a curated kit of Claude Code skills. Install the popular packs side by side and you end up with around 150 skills that quietly fight each other: say "I'm done" and four different reviewers fire in a random order, say "review this" and three skills raise a hand, and every description sitting in context is costing you tokens. xvant takes the best of those packs and rebuilds them into 31 skills where exactly one skill owns each moment.
+xvant is a curated kit of Claude Code skills. Install the popular packs side by side and you end up with around 150 skills that quietly fight each other: say "I'm done" and four different reviewers fire in a random order, say "review this" and three skills raise a hand, and every description sitting in context is costing you tokens. xvant takes the best of those packs and rebuilds them into 32 skills where exactly one skill owns each moment.
 
 ## The problem it solves
 
@@ -58,11 +58,11 @@ On Windows, copy the `xvant-*` and `_shared` folders into `%USERPROFILE%\.claude
 
 ## What's inside
 
-31 skills across the full loop:
+32 skills across the full loop:
 
 | Phase | Skills |
 |---|---|
-| Shape | brainstorm, plan, plan-review, to-work |
+| Shape | brainstorm, plan, plan-review, ultra-plan, to-work |
 | Build | tdd, execute, worktree, debug, prototype |
 | Check | verify, review, review-exchange, security, simplify |
 | Ship | ship, release-guard, repo-guard |
