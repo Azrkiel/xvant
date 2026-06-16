@@ -24,6 +24,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 | xvant-brainstorm | superpowers brainstorming | ★ office-hours (startup six-Q + builder), spec rigor |
 | xvant-plan ◆ | superpowers writing-plans | autoplan autonomous mode |
 | xvant-plan-review | gstack plan-eng-review | ★ 10x CEO review, plan-design/devex, plan-tune |
+| xvant-ultra-plan | ORCHESTRATOR → plan → adversarial self-critique → unanchored Codex critique → stake-free judge → reconciled plan (cross-model debate, explicit-invoke only) | — |
 | xvant-to-work | anthropic to-prd | to-issues |
 | xvant-tdd | superpowers test-driven-development | (80–90% coverage target) |
 | xvant-execute ◆ | superpowers executing-plans | subagent-driven, parallel-dispatch, gstack pair-agent |
