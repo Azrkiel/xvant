@@ -49,6 +49,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 | xvant-handoff | gstack context-save/restore + custom 13-section spec | machine-facing; links to retro, no reflection dup |
 | xvant-repo-guard | anthropic git-guardrails | setup-pre-commit, gstack careful/guard/redact |
 | xvant-prototype | anthropic prototype | (throwaway; relaxes TDD) |
+| xvant-hackathon | original (field notes from two 36-hour builds) | modes: prep, submit; overrides plan / tdd / verify until submission; reuses `_shared/parallel-dispatch.md` |
 | xvant-retro | session-report | gstack retro (human-facing; owns reflection) |
 | xvant-schedule | built-in schedule | built-in loop |
 | xvant-caveman | built-in caveman (full/ultra) | escalates the lite baseline |
@@ -58,6 +59,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 ## Collisions resolved
 - **End-of-task pile** (verify/review/security/simplify all fired on "done"): `xvant-verify` is the sole "done" trigger and sequences the other three; those three are explicit-invoke only.
 - **Session-end pair** (handoff vs retro): split by audience — `xvant-handoff` = machine-facing resume state; `xvant-retro` = human-facing lessons. Handoff links to retro, never duplicates reflection.
+- **Timeboxed-build pair** (hackathon vs prototype): split by judges and a clock — `xvant-hackathon` = a judged demo build with a deadline (plans the whole event, owns the word "hackathon"); `xvant-prototype` = an untimed spike that answers one question. While `xvant-hackathon` is active it outranks `xvant-plan`, `xvant-tdd` and `xvant-verify`; its honesty line is not relaxed.
 - **Deep-review / swarm** (deep review / swarm review): a deeper "review my changes" pass shares `xvant-review`'s trigger, so it was folded in as the explicit `swarm` mode rather than a separate `xvant-ultrareview` skill (explicit-mode escalation, like caveman) — avoids reintroducing the trigger collision the kit exists to prevent. Reviewer subagents live in `~/.claude/agents/xvant-review-*.md`.
 
 ## Dropped / excluded
