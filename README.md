@@ -2,7 +2,7 @@
 
 **One skill per moment. No overlap, no noise, fewer tokens.**
 
-xvant is a curated kit of Claude Code skills. Install the popular packs side by side and you end up with around 150 skills that quietly fight each other: say "I'm done" and four different reviewers fire in a random order, say "review this" and three skills raise a hand, and every description sitting in context is costing you tokens. xvant takes the best of those packs and rebuilds them into 32 skills where exactly one skill owns each moment.
+xvant is a curated kit of Claude Code skills. Install the popular packs side by side and you end up with around 150 skills that quietly fight each other: say "I'm done" and four different reviewers fire in a random order, say "review this" and three skills raise a hand, and every description sitting in context is costing you tokens. xvant takes the best of those packs and rebuilds them into 33 skills where exactly one skill owns each moment.
 
 ## The problem it solves
 
@@ -39,6 +39,8 @@ A single line from idea to shipped:
 brainstorm -> plan -> tdd -> execute -> verify -> ship
 ```
 
+or, when you want it built without being asked along the way, `intent`: one interview, then a hands-off build to a final report.
+
 with `debug`, `plan-review`, `architecture`, `docs`, `handoff`, and the others on hand when the moment calls for them. Full map lives in `xvant-INDEX`.
 
 ## Install
@@ -58,11 +60,11 @@ On Windows, copy the `xvant-*` and `_shared` folders into `%USERPROFILE%\.claude
 
 ## What's inside
 
-32 skills across the full loop:
+33 skills across the full loop:
 
 | Phase | Skills |
 |---|---|
-| Shape | brainstorm, plan, plan-review, to-work, hackathon |
+| Shape | brainstorm, plan, plan-review, to-work, hackathon, intent |
 | Build | tdd, execute, worktree, debug, prototype |
 | Check | verify, review, review-exchange, security, simplify |
 | Ship | ship, release-guard, repo-guard |
