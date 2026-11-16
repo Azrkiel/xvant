@@ -50,6 +50,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 | xvant-repo-guard | anthropic git-guardrails | setup-pre-commit, gstack careful/guard/redact |
 | xvant-prototype | anthropic prototype | (throwaway; relaxes TDD) |
 | xvant-hackathon | original (field notes from two 36-hour builds) | modes: prep, submit; overrides plan / tdd / verify until submission; reuses `_shared/parallel-dispatch.md` |
+| xvant-intent | original (port of the Intent app's method, Azrkiel/Intent) | two stages: Understand (only stage that asks) → Steer (hands-off build, decision policy, aligned additions gated by a 3-proxy vote, stop conditions, report); bundled `scripts/` (lexicon, reader agreement, proxy check) |
 | xvant-retro | session-report | gstack retro (human-facing; owns reflection) |
 | xvant-schedule | built-in schedule | built-in loop |
 | xvant-caveman | built-in caveman (full/ultra) | escalates the lite baseline |
@@ -60,6 +61,7 @@ A curated, no-overlap toolset assembled from superpowers, gstack, the official C
 - **End-of-task pile** (verify/review/security/simplify all fired on "done"): `xvant-verify` is the sole "done" trigger and sequences the other three; those three are explicit-invoke only.
 - **Session-end pair** (handoff vs retro): split by audience — `xvant-handoff` = machine-facing resume state; `xvant-retro` = human-facing lessons. Handoff links to retro, never duplicates reflection.
 - **Timeboxed-build pair** (hackathon vs prototype): split by judges and a clock — `xvant-hackathon` = a judged demo build with a deadline (plans the whole event, owns the word "hackathon"); `xvant-prototype` = an untimed spike that answers one question. While `xvant-hackathon` is active it outranks `xvant-plan`, `xvant-tdd` and `xvant-verify`; its honesty line is not relaxed.
+- **Idea-to-build trio** (intent vs brainstorm vs plan): split by who decides during the build — `xvant-brainstorm` = explore whether and what to build, with the user; `xvant-plan` → `xvant-execute` = a written plan run with human checkpoints; `xvant-intent` = interview once, then build the whole thing without asking, owning "end to end" / "hands-off" / "run with it". `xvant-intent` never crosses a one-way door (accounts, data store, paid or external services, deleting data, publishing) on its own.
 - **Deep-review / swarm** (deep review / swarm review): a deeper "review my changes" pass shares `xvant-review`'s trigger, so it was folded in as the explicit `swarm` mode rather than a separate `xvant-ultrareview` skill (explicit-mode escalation, like caveman) — avoids reintroducing the trigger collision the kit exists to prevent. Reviewer subagents live in `~/.claude/agents/xvant-review-*.md`.
 
 ## Dropped / excluded
