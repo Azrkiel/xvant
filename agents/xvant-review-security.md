@@ -1,6 +1,6 @@
 ---
 name: xvant-review-security
-description: Zero-context security reviewer for xvant-review's swarm mode. Spawned to scan a diff for vulnerability smells. Read-only; flags SUSPECTED candidates whose exploitability is verified downstream, not authoritative verdicts.
+description: Read-only swarm reviewer of security-sensitive changes. Reports suspected findings for verification.
 tools: Read, Grep, Glob
 model: haiku
 ---

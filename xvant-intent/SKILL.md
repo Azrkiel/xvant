@@ -1,101 +1,25 @@
 ---
 name: xvant-intent
-description: Use when the user wants an idea built end to end, hands-off — interview once (goals, principles, trade-offs, taste), get one approval of a charter, then build the whole project without asking, deciding by the user's principles, adding features that serve their goals within a budget, and reporting at the end. Triggers include "build this end to end", "take this idea and run with it", "build it without asking me", "hands-off build", "don't ask me every step", "use Intent". For exploring whether or what to build use xvant-brainstorm; for a plan executed with human checkpoints use xvant-plan; for a timeboxed judged demo use xvant-hackathon.
+description: "Use when asked to build end to end, hands-off, “run with it” or “without asking me” after one interview. Checkpointed plans use xvant-plan."
 ---
 
-# xvant-intent: understand once, then steer
+Understand once, then steer from an approved charter. Label every requirement, decision and feature `user` (exact quote), `drafted` (user selected it) or `intent` (your decision and the goal it serves).
 
-Coding agents build what was typed, not what was meant, and they stop to ask about every
-gap. Intent works the other way: it spends the human's time once, up front, learning what
-they are after and how they decide, then builds the entire project without asking again. It
-behaves like a product owner who knows the user's goals, not a spec-taker: when a feature
-would clearly serve those goals, it builds it and says so afterwards.
+**Understand.** Follow `references/understand.md`. Learn why, taste, principles, trade-offs and yes/no examples. For gaps, propose a specific answer with assumptions and 2–3 options, one question per turn. Collect human inputs. Settle accounts/identity, storage/migrations, external or paid services, credentials, spending, publishing and destructive changes. Get one charter approval.
 
-**One principle:** understand the user well enough to decide as they would, and never pass
-off your own decision as their words.
+State the depth and allow the user to adjust it:
 
-## Two stages
+| Ambition | Interview | Default addition budget |
+|---|---|---|
+| Throwaway | Job, Good looks like, Fails if; 3 calibration items | None |
+| Personal | Full North Star, 3 principles, 5 items | Small |
+| Shared | Full North Star, principles, trade-offs, 6–8 items | Small |
+| Product | Full interview | Moderate |
 
-1. **Understand** (the only stage that talks to the user). Learn the goal, the North Star,
-   the user's principles and trade-offs, and their taste; settle every one-way decision;
-   collect what only a human can provide; end with one approval of the charter. See
-   `references/understand.md`.
-2. **Steer** (no questions). Plan, build, verify with real checks, decide what nobody
-   anticipated by the charter's rules, add aligned features within a budget, and finish with
-   a report. See `references/steer.md`.
+**Steer.** Tell the user the next contact is the report unless a charter stop condition occurs. Follow `references/steer.md`. Use real acceptance-command output. Finish all must-haves before additions. Each addition must serve a named goal/principle, fit ambition and budget, respect non-goals, remain isolated and reversible, avoid one-way doors and pass the proxy vote. For an unforeseen one-way decision, take a reversible path or stop. Otherwise decide, log and continue. Disclose non-independent proxies/readers/builders and halve the addition budget.
 
-When the user approves the charter, tell them plainly: *"I won't ask you anything else
-until the report, unless I hit a stop condition."* Then keep that promise.
+**Resume.** Keep `INTENT.md` (ledger and run state), `CHARTER.md` and `INTENT-REPORT.md` in the project. Reference `@CHARTER.md` from Claude instructions or “Read CHARTER.md before any work” from AGENTS.md. On user edits or new input, update ledger and charter, log and continue. Reopen Understand for a one-way decision.
 
-## Hard rules
+Use the relevant reference as needed: `references/ledger.md`, `references/north-star.md`, `references/critics-and-decisions.md`, `references/charter.md`, `references/phase-plan.md`. Use `templates/INTENT.md`, `templates/charter.md` and `templates/report.md` for the three state files. The G1 lexicon, optional G4 reader agreement and proxy calibration checks live in `scripts/lexicon.py`, `scripts/agreement.py` and `scripts/proxy_check.py`.
 
-1. **Provenance on everything.** Every requirement, decision and feature is labeled by
-   origin: `user` (exact quote from their message), `drafted` (a draft the user picked), or
-   `intent` (your own call, with the goal it serves). Never present an `intent` item as the
-   user's.
-2. **Learn the why and the how-you-decide, not only the what.** A list of features can't
-   steer; principles, trade-offs and worked yes/no examples can.
-3. **Propose, then confirm.** In Understand, when an answer is missing or vague, draft the
-   most plausible specific answer, list your assumptions, and let the user pick or edit. One
-   question per turn, with 2-3 concrete options.
-4. **One-way doors belong to the user.** Accounts and identity, the data model's storage
-   and anything that needs a migration to undo, external or paid services, deleting or
-   overwriting user data, credentials, spending money, and publishing anything outward.
-   Settle them in Understand. In Steer, never cross one for a feature you added on your own;
-   if the build itself forces an unforeseen one, take a reversible path or stop (rule 7).
-5. **Additions must pass the alignment test** in `references/steer.md`: serve a named
-   North Star outcome or principle, fit the Ambition, break no non-goal, cross no one-way
-   door, stay reversible and isolated, fit the budget, and win the proxy vote.
-6. **Must-haves first, done means checked.** Additions start only after every must-have
-   passes its check. "Done" means the charter's acceptance commands pass, with their output.
-7. **Stop conditions are the only reason to come back early.** They are listed in the
-   charter. Anything else, decide, log it, and keep going.
-8. **Be honest about checks.** Report a check as run only if you ran it. If proxies,
-   readers or builders weren't independent subagents, say so and halve the addition budget.
-
-## Depth scales with Ambition
-
-| Ambition (from the North Star) | Understand covers | Addition budget default |
-| --- | --- | --- |
-| Throwaway script | Job, Good looks like, Fails if; 3 calibration items | none |
-| Personal tool | full North Star, 3 principles, 5 calibration items | small |
-| Shared with a few people | full North Star, principles, trade-offs, 6-8 calibration items | small |
-| Product | everything in `references/understand.md` | moderate |
-
-Say which depth you picked in one line; the user can change it.
-
-## State on disk
-
-Keep everything in the project so a fresh session or another agent can resume:
-
-- `INTENT.md` (`templates/INTENT.md`): ledger, North Star, principles, calibration,
-  decisions, and during Steer the run state and decision log.
-- `CHARTER.md` (`templates/charter.md`): the approved charter the build follows.
-  Reference it from the agent's instructions file instead of pasting it there: add
-  `@CHARTER.md` to `CLAUDE.md` for Claude Code, or "Read CHARTER.md before any work" to
-  `AGENTS.md` for Codex.
-- `INTENT-REPORT.md` (`templates/report.md`): the end-of-run report.
-
-If the user edits a file or speaks during Steer, treat it as a new turn: update the ledger
-and charter, log the change, and continue without re-running Understand unless it touches
-a one-way door.
-
-## References
-
-- `references/understand.md`: the interview, in order, and its gate.
-- `references/ledger.md`: ledger items, provenance, extraction rules.
-- `references/north-star.md`: the six fields, rubric, checks G1-G4, drafting.
-- `references/critics-and-decisions.md`: finding build-changing gaps; builder divergence.
-- `references/charter.md`: playback, the charter's sections, and verifying it.
-- `references/steer.md`: the autonomous loop, decision policy, alignment test, proxy vote,
-  budget, stop conditions, report.
-- `references/phase-plan.md`: phases, work packages and automated phase gates.
-- `scripts/lexicon.py`: vague-word scan (G1).
-- `scripts/agreement.py`: two-reader agreement (G4, optional).
-- `scripts/proxy_check.py`: how well proxies predict the user's calibration answers.
-
-## Provenance
-
-Ported from the Intent app (https://github.com/Azrkiel/Intent, `skills/intent/`). The
-lexicon and agreement scripts match `backend/app/clarity` there; that repo's
-`backend/tests/test_skill_scripts.py` guards the copies.
+Source: https://github.com/Azrkiel/Intent (`skills/intent/`). Its `backend/tests/test_skill_scripts.py` guards the lexicon and agreement copies.

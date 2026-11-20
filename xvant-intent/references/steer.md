@@ -67,7 +67,7 @@ Every line must be true, or the candidate becomes a suggestion in the report ins
 - [ ] Fits the Ambition (no social, multi-user, scale or monetization work on a personal
       tool unless the North Star says so).
 - [ ] Breaks no non-goal and no must-not.
-- [ ] Crosses no one-way door (see `SKILL.md` rule 4).
+- [ ] Crosses no one-way door (see the one-way decisions under Understand in `SKILL.md`).
 - [ ] Reversible and isolated: lands in its own commit, and removing it breaks nothing
       else.
 - [ ] Fits the remaining budget in count and effort.
