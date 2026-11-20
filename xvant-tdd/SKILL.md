@@ -1,34 +1,12 @@
 ---
 name: xvant-tdd
-description: Use when implementing any feature or bugfix, before writing implementation code. Triggers on starting to build a function, fix a bug, or change behavior — write the test first, watch it fail, then minimal code.
+description: "Use when implementing a feature, behavior change or bugfix that needs a failing test before production code."
 ---
 
-# xvant-tdd
+Start with a failing test for each behavior or bug. Delete premature implementation and write it fresh after RED.
 
-Write the test first. Watch it fail. Write minimal code to pass.
+1. RED: one named test of real behavior; mock only when unavoidable. Run it and observe failure for the expected missing behavior. If already green, correct the test.
+2. GREEN: write the smallest implementation. Run the test and suite; check for clean output.
+3. REFACTOR: improve names or remove duplication while green. Repeat per behavior.
 
-> Baseline: follow `~/.claude/CLAUDE.md` caveman-lite discipline.
-
-**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing. Violating the letter of the rules is violating the spirit.
-
-## The Iron Law
-```
-NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
-```
-Wrote code before the test? Delete it — don't keep it as "reference", don't "adapt" it. Implement fresh from tests.
-
-## Red-Green-Refactor
-1. **RED** — one minimal test of real behavior (clear name, one thing, no mocks unless unavoidable).
-2. **Verify RED** — run it, confirm it FAILS for the expected reason (feature missing, not a typo). Passes immediately? You're testing existing behavior — fix the test.
-3. **GREEN** — simplest code that passes. No extra features, no premature abstraction (YAGNI).
-4. **Verify GREEN** — run it; output pristine (no errors/warnings); other tests still pass.
-5. **REFACTOR** — remove duplication, improve names; stay green; add no behavior.
-6. Repeat for the next behavior.
-
-## Coverage target
-Aim for **80-90%** meaningful coverage, not 100%. Cover behavior, edge cases, and error paths; don't write hollow tests chasing a number.
-
-## Exceptions (ask first)
-Throwaway prototypes, generated code, config files. "Skip TDD just this once" is a rationalization — stop.
-
-Bug fix? Write a failing test that reproduces it, then fix. The test proves the fix and prevents regression. If a test fails for an unexplained reason (not the expected RED, or a fix doesn't take), STOP and hand to `xvant-debug` rather than stacking fixes. Full reference + rationalization table: `~/.claude/refs/superpowers/test-driven-development/SKILL.md`.
+Aim for 80–90% meaningful coverage including edges and errors. Ask before exceptions for prototypes, generated code or configuration. Send unexplained failures to xvant-debug before further fixes. Full procedure: `~/.claude/refs/superpowers/test-driven-development/SKILL.md`.

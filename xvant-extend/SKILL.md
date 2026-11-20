@@ -1,13 +1,11 @@
 ---
 name: xvant-extend
-description: Use when authoring an extension artifact for Claude Code itself — writing an MCP server, a hook script, or a plugin (commands/agents/structure). Triggers include "build an MCP server", "write a hook script", "create a plugin", "add a slash command", "make an agent". For enabling or recommending an automation or changing settings (not writing the script), use xvant-configure; for authoring a skill, use xvant-write-skill.
+description: "Use when authoring a Claude Code MCP server, hook script, slash command, agent or plugin. Skills use xvant-write-skill."
 ---
 
 # xvant-extend
 
 Advanced authoring for Claude Code extensions. Pick the section that matches the task. (For skills, use `xvant-write-skill`.)
-
-> Baseline: follow `~/.claude/CLAUDE.md` caveman-lite discipline.
 
 ## Section: MCP server (spine: mcp-server-dev)
 Build a Model Context Protocol server / app, with prompt-caching-aware design where relevant.

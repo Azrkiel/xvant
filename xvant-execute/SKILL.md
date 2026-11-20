@@ -1,29 +1,12 @@
 ---
 name: xvant-execute
-description: Use when you have a written implementation plan and need to execute its tasks in this session with review checkpoints. Triggers include "execute the plan", "run the plan", "work through the tasks", "start implementing the plan". For parallelizable independent tasks, see the subagent and parallel modes below.
+description: "Use when implementing a written plan with checkpoints, independent parallel tasks or live pairing."
 ---
 
-# xvant-execute ◆
+Announce “Using xvant-execute to implement this plan.” Read and critique the plan; raise concerns before starting. Draw happy and failure paths with `~/.claude/skills/_shared/ascii-diagram.md` for a human sanity check. Get explicit consent before working on main/master or use xvant-worktree.
 
-Load a plan, review it critically, execute its tasks, verify, report.
+Track one todo per task: mark in progress, follow the steps, run the specified checks, then mark complete. Stop and ask at blockers. Route persistent or unexplained failures to xvant-debug. Hand passing work to xvant-ship.
 
-> Baseline: follow `~/.claude/CLAUDE.md` caveman-lite discipline.
-> Entry step: before writing the first unit of code, follow `~/.claude/skills/_shared/ascii-diagram.md` and draw the flow (happy + unhappy paths). Let the human sanity-check it.
-
-**Announce:** "Using xvant-execute to implement this plan."
-
-## Spine (superpowers executing-plans)
-1. Read the plan. Review critically — raise concerns BEFORE starting. Create a todo per task.
-2. Per task: mark in_progress → follow each step exactly → run the specified verifications → mark complete. Don't skip verifications.
-3. Never start implementation on main/master without explicit consent (use `xvant-worktree`).
-4. **Stop and ask** on any blocker (missing dep, failing test, unclear instruction, repeated verification failure). Don't guess. On a persistent or root-cause-unclear test failure, hand to `xvant-debug` before attempting a fix.
-5. After all tasks pass, hand to `xvant-ship` to finish the branch.
-
-## Mode: subagent-driven (graft)
-When tasks are mostly independent and you want continuous in-session execution: dispatch a fresh subagent per task, then two-stage review each — spec compliance first, then code quality — looping fixes until both pass. Don't pause to check in between tasks; only stop on BLOCKED/ambiguity/done. Full: `~/.claude/refs/superpowers/subagent-driven-development/SKILL.md`.
-
-## Mode: parallel dispatch (graft)
-For 2+ truly independent problems (different files/subsystems, no shared state): prepare the briefs and collect results using `~/.claude/skills/_shared/parallel-dispatch.md`, then run the full suite on the integrated revision. Full: `~/.claude/refs/superpowers/dispatching-parallel-agents/SKILL.md`.
-
-## Mode: pair-agent (graft, gstack)
-For live pairing/tunneled collaboration: `~/.claude/refs/gstack/pair-agent/SKILL.md`.
+- Subagent-driven: fresh agent per independent task. Review spec compliance then code quality, iterating fixes. Continue between tasks unless blocked or ambiguous. `~/.claude/refs/superpowers/subagent-driven-development/SKILL.md`
+- Parallel dispatch: for independent scopes without shared mutable state, use `~/.claude/skills/_shared/parallel-dispatch.md` for briefs/results, then run the full suite on the integrated revision. `~/.claude/refs/superpowers/dispatching-parallel-agents/SKILL.md`
+- Live pairing: `~/.claude/refs/gstack/pair-agent/SKILL.md`

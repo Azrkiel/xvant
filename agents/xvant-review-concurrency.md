@@ -1,6 +1,6 @@
 ---
 name: xvant-review-concurrency
-description: Zero-context concurrency and edge-case reviewer for xvant-review's swarm mode. Spawned to walk a diff against a race/boundary checklist. Read-only; produces SUSPECTED findings verified downstream.
+description: Read-only swarm reviewer for races, async ordering and input boundaries. Reports suspected findings.
 tools: Read, Grep, Glob
 model: haiku
 ---

@@ -1,13 +1,11 @@
 ---
 name: xvant-security
-description: Use ONLY when explicitly asked for a security pass — "security check", "security review", "security audit", "is this safe", "check for vulnerabilities". Does NOT self-trigger on a bare "done" (xvant-verify orchestrates that and calls this).
+description: "Use ONLY when explicitly asked for a security check, “is this safe?”, vulnerability audit or threat model."
 ---
 
 # xvant-security
 
 Security audit of the pending change. Explicit-invoke only.
-
-> Baseline: follow `~/.claude/CLAUDE.md` caveman-lite discipline. Security warnings: write in full, not terse.
 
 **Spine:** the built-in `/security-review` command — review pending changes on the current branch for vulnerabilities (injection, authz/authn, secrets, unsafe deserialization, SSRF, path traversal, etc.).
 

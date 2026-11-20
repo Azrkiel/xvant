@@ -1,6 +1,6 @@
 ---
 name: xvant-review-architecture
-description: Zero-context architecture reviewer for xvant-review's swarm mode. Spawned to judge a diff's structure, coupling, and testability against the codebase's existing patterns. Always sees the whole diff. Read-only; produces SUSPECTED findings.
+description: Read-only swarm reviewer of whole-diff architecture, coupling and testability. Reports suspected findings.
 tools: Read, Grep, Glob
 model: haiku
 ---

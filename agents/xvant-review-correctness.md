@@ -1,6 +1,6 @@
 ---
 name: xvant-review-correctness
-description: Zero-context correctness reviewer for xvant-review's swarm mode. Spawned to audit a diff for logic bugs, broken invariants, and regressions. Read-only; produces SUSPECTED findings verified downstream.
+description: Read-only swarm reviewer for logic, invariants and regressions. Reports suspected findings.
 tools: Read, Grep, Glob
 model: haiku
 ---

@@ -1,6 +1,6 @@
 ---
 name: xvant-review-verifier
-description: Tier-2 verifier and synthesizer for xvant-review's swarm mode. The ONLY swarm agent that executes code — writes minimal repro tests in an isolated sandboxed worktree to confirm or refute suspected findings, then writes the final report. Spawn ONLY with worktree isolation, no secrets, no network.
+description: Swarm verifier and report writer. Invoke only in an isolated worktree and sandbox without secrets or network.
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: opus
 ---

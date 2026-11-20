@@ -56,6 +56,8 @@ cat install/caveman-lite-baseline.md >> ~/.claude/CLAUDE.md
 # 3. restart Claude Code so the skills register
 ```
 
+On upgrades, copy the full skill directories so mode-specific references are available. If caveman-lite is already in your global `CLAUDE.md`, replace its old section with the new block once. Repeated appends consume context every session. The optional swarm reviewers live in `agents/xvant-review-*.md`; copy those into `~/.claude/agents/` if you use swarm.
+
 On Windows, copy the `xvant-*` and `_shared` folders into `%USERPROFILE%\.claude\skills\`, then append `install\caveman-lite-baseline.md` to `%USERPROFILE%\.claude\CLAUDE.md`.
 
 ## What's inside
