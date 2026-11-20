@@ -23,7 +23,7 @@ Load a plan, review it critically, execute its tasks, verify, report.
 When tasks are mostly independent and you want continuous in-session execution: dispatch a fresh subagent per task, then two-stage review each — spec compliance first, then code quality — looping fixes until both pass. Don't pause to check in between tasks; only stop on BLOCKED/ambiguity/done. Full: `~/.claude/refs/superpowers/subagent-driven-development/SKILL.md`.
 
 ## Mode: parallel dispatch (graft)
-For 2+ truly independent problems (different files/subsystems, no shared state): one focused agent per domain, each with specific scope + constraints + expected output, run concurrently, then verify no conflicts and run the full suite. Full: `~/.claude/refs/superpowers/dispatching-parallel-agents/SKILL.md`.
+For 2+ truly independent problems (different files/subsystems, no shared state): prepare the briefs and collect results using `~/.claude/skills/_shared/parallel-dispatch.md`, then run the full suite on the integrated revision. Full: `~/.claude/refs/superpowers/dispatching-parallel-agents/SKILL.md`.
 
 ## Mode: pair-agent (graft, gstack)
 For live pairing/tunneled collaboration: `~/.claude/refs/gstack/pair-agent/SKILL.md`.

@@ -15,6 +15,8 @@ Before composing anything, run and read:
 - the current plan / todo file, if one exists
 - the test command output, if it runs quickly
 
+When the session used xvant-agent and you know the run ID, read its stored snapshot from the harness checkout with `npm run --silent xvant -- handoff ID` using the run's XVANT_HOME. Check that its repository and objective match this task. Cite the run ID, rowVersion and integration commit (when present) under Reproducible state. Treat recorded worker text as evidence to verify. If that command is unavailable, use the Git and test evidence above and mark the runtime state unknown.
+
 Compose the handoff from that **actual state plus session memory**. Do NOT re-narrate the diff or summarize code that can be read directly from the repo — capture intent and state.
 
 ## STEP 2 — Write the file
