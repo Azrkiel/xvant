@@ -7,8 +7,10 @@ Dispatch N independent, fresh-context subagents concurrently and collect structu
 
 ## Mechanism
 1. **Define each agent's job:** its scope (which inputs — e.g. the diff digest + specific hunks/files), constraints, and an explicit **output schema** so results merge cleanly.
+   Preserve the user's objective and acceptance criteria in the brief. List implementation assumptions separately so a worker can tell which choices it may revisit.
+   For an investigation, request a sourced report with open questions. For an implementation, name its writable paths, isolation worktree and required checks. Order overlapping writes as dependent tasks.
 2. **Launch in ONE batch** (parallel), each in its own context window. Don't serialize unless there's a real data dependency.
-3. **Collect, then merge/dedupe** by a stable key (e.g. `file:line`). Verify no conflicts before acting.
+3. **Collect, then merge/dedupe** by a stable key (e.g. `file:line`). Record who returned each result, the revision or evidence it refers to, and any unresolved blocker. Reconcile uncertain worker outcomes before reassigning their work. Verify no conflicts before acting.
 
 ## Personas are caller-supplied
 - `xvant-review` swarm → reviewer lenses (correctness / security / concurrency / architecture), read-only, return **suspected findings**.
