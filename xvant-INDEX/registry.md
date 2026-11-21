@@ -37,7 +37,7 @@
 | xvant-docs | gstack document-generate | document-release, make-pdf, landing-report, edit-article |
 | xvant-second-brain | second-brain | obsidian-vault reference |
 | xvant-study | anthropic grill-me | grill-with-docs, gstack learn |
-| xvant-handoff | gstack context-save/restore + custom 13-section spec | machine-facing; links to retro, no reflection dup |
+| xvant-handoff | gstack context-save/restore + custom 13-section spec | next-agent prompt with required reading, a verifiable milestone and model assignments; links to retro |
 | xvant-repo-guard | anthropic git-guardrails | setup-pre-commit, gstack careful/guard/redact |
 | xvant-prototype | anthropic prototype | (throwaway; relaxes TDD) |
 | xvant-hackathon | original (field notes from two 36-hour builds) | modes: prep, submit; overrides plan / tdd / verify until submission; reuses `_shared/parallel-dispatch.md` |
