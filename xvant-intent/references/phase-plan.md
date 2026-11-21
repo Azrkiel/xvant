@@ -42,7 +42,7 @@ failing must-have check.
 
 ## Handing packages to subagents
 
-When work runs in parallel, give each worker only: the charter's common rules, its own
+Track delegated packages as checkbox rows in the Steer run state in `INTENT.md`. Use `~/.claude/skills/_shared/parallel-dispatch.md` for worker checkoff and integration. Keep the phase gate above. Give each worker only: the charter's common rules, its own
 package and tasks, the exact ledger quotes it relies on, the decision policy, and its
 declared inputs. Workers log their decisions in the same format; the lead merges them into
 `INTENT.md`. In Claude Code this is a subagent prompt; in Codex, a task with the package

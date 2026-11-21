@@ -22,6 +22,8 @@ The payoff is trigger distinctness. Each skill's description claims keywords no 
 
 **The "I'm done" pile, fixed.** `xvant-verify` is the only skill that triggers on "done." It runs the end-of-task chain in order instead of letting four skills race: runtime check, then code review, then security, then cleanup. `xvant-review`, `xvant-security`, and `xvant-simplify` still work on their own; they just stop fighting over the generic finish line.
 
+**One plan across agents.** The orchestrator assigns each worker an outcome from the written plan. Workers check off their task with evidence and return a short result. A fresh session can pick up open tasks and pending integration checks from the same plan.
+
 **Diagram before you code.** Four skills (`plan`, `execute`, `architecture`, `debug`) make you render the flow as an ASCII diagram first, unhappy paths included. If a failure branch has no arrow, the diagram is not finished. That map stays in context while you build.
 
 **Leaner replies by default.** A caveman-lite baseline strips filler, hedging, and pleasantries from every response while keeping articles and normal sentences, so the output stays readable. Human-facing prose, the `humanizer` skill, and safety warnings are exempt and stay full.
@@ -47,8 +49,8 @@ with `debug`, `plan-review`, `architecture`, `docs`, `handoff`, and the others o
 
 ```bash
 # 1. drop the skills into place
-cp -r xvant-* ~/.claude/skills/
-cp -r _shared ~/.claude/skills/_shared
+mkdir -p ~/.claude/skills/
+cp -r xvant-* _shared ~/.claude/skills/
 
 # 2. turn on the token baseline (append the block to your global CLAUDE.md)
 cat install/caveman-lite-baseline.md >> ~/.claude/CLAUDE.md
@@ -57,6 +59,8 @@ cat install/caveman-lite-baseline.md >> ~/.claude/CLAUDE.md
 ```
 
 On upgrades, copy the full skill directories so mode-specific references are available. If caveman-lite is already in your global `CLAUDE.md`, replace its old section with the new block once. Repeated appends consume context every session. The optional swarm reviewers live in `agents/xvant-review-*.md`; copy those into `~/.claude/agents/` if you use swarm.
+
+Some skills also refer to upstream procedures under `~/.claude/refs/` or to installed Claude plugins. The copy commands install the xvant kit only. For example, `xvant-browse` points to the gstack browse setup; check that dependency before using its browser workflow.
 
 On Windows, copy the `xvant-*` and `_shared` folders into `%USERPROFILE%\.claude\skills\`, then append `install\caveman-lite-baseline.md` to `%USERPROFILE%\.claude\CLAUDE.md`.
 

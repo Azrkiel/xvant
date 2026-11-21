@@ -46,7 +46,7 @@
 | xvant-schedule | built-in schedule | built-in loop |
 | xvant-caveman | built-in caveman (full/ultra) | escalates the lite baseline |
 
-`_shared/` references (no trigger): `ascii-diagram.md` (◆ flow diagram) · `diff-digest.md` (read-diff-once pre-pass) · `parallel-dispatch.md` (fan-out helper). The last two are shared by `xvant-review` swarm + `xvant-execute`.
+`_shared/` references (no trigger): `ascii-diagram.md` (◆ flow diagram) · `diff-digest.md` (read-diff-once pre-pass) · `parallel-dispatch.md` (main-plan task assignment, worker checkoff and integration). The review swarm uses the digest and the read-only dispatch path.
 
 ## Collisions resolved
 - **End-of-task pile** (verify/review/security/simplify all fired on "done"): `xvant-verify` is the sole "done" trigger and sequences the other three; those three are explicit-invoke only.

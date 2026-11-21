@@ -8,7 +8,7 @@ A deeper local pass above the base review. **Explicit-invoke only** — never se
 Run these six stages in THIS order — the ordering is the optimization, do not reorder:
 
 1. **DIGEST (read once).** One pre-pass reads the diff a single time and emits a compact map (files, per-file change type, touched symbols, hunk ranges) — follow `~/.claude/skills/_shared/diff-digest.md`. Downstream agents get this digest plus only the hunks they need, never the full raw diff each.
-2. **FAN-OUT (parallel, fresh context).** Dispatch the four reviewer lenses concurrently via `~/.claude/skills/_shared/parallel-dispatch.md`, each a zero-context subagent returning **suspected findings only**:
+2. **FAN-OUT (parallel, fresh context).** Dispatch the four reviewer lenses concurrently via `~/.claude/skills/_shared/parallel-dispatch.md`, with one read-only task ID per lens. The lead records each returned result in the plan, including an empty findings list. Each lens is a zero-context subagent returning **suspected findings only**:
    - `xvant-review-correctness` — logic, error handling, regressions
    - `xvant-review-security` — injection, authz, secret leakage, crypto misuse
    - `xvant-review-concurrency` — races, shared state, edge/boundary cases

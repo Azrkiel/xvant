@@ -5,6 +5,8 @@ description: "Use when asked to build end to end, hands-off, “run with it” o
 
 Understand once, then steer from an approved charter. Label every requirement, decision and feature `user` (exact quote), `drafted` (user selected it) or `intent` (your decision and the goal it serves).
 
+For independent readers, critics, builders or proxy voters, track each assignment in `INTENT.md` by ID and apply the read-only result rule in `~/.claude/skills/_shared/parallel-dispatch.md`. Preserve the inputs and independent response required by each exercise.
+
 **Understand.** Follow `references/understand.md`. Learn why, taste, principles, trade-offs and yes/no examples. For gaps, propose a specific answer with assumptions and 2–3 options, one question per turn. Collect human inputs. Settle accounts/identity, storage/migrations, external or paid services, credentials, spending, publishing and destructive changes. Get one charter approval.
 
 State the depth and allow the user to adjust it:
