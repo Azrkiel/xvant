@@ -22,8 +22,8 @@ Team: <name: lane> · Integrator: <name>
 Faked for now: <stage: how it is faked>
 
 ## Upgrade queue (the order a judge sees)
-1. <fake to replace>
-2. <fake to replace>
+- [ ] H1 <judge-visible upgrade> | <lane> | <what the human should see>
+- [ ] H2 <judge-visible upgrade> | <lane> | <what the human should see>
 
 ## Fallback
 Mode: <simulated / recorded>, default on, labelled "<label>" on screen.

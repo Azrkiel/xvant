@@ -51,6 +51,8 @@ Proxy check: <trusted / cautious / untrusted, accuracy, false yes> · Addition b
 Phase: <n of m> · Must-haves passing: <x of y> · Additions: <used of budget>
 Last passing commit: <sha>
 
+- [ ] <package ID> <outcome> | <owner> | <must-have ID and acceptance command>
+
 ## Decision log (Steer)
 
 ```text

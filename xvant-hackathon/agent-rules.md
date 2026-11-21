@@ -19,7 +19,7 @@ Read `HACKATHON.md` first. It is the only plan. The demo script in it decides wh
 - No tests, no status or evidence docs, no refactors, unless asked. One recorded replay of the demo path is added after freeze.
 - Stuck for 30 minutes: fake that stage, note it under "Faked for now", move on.
 - You have standing approval for model calls, retries and re-runs on the demo path. Do not stop to ask, and do not ration them.
-- After each change, tell the human the one thing to try by hand and what they should see.
+- Give the integrator your HACKATHON.md task ID and one thing to try by hand. Check off your upgrade after the human observes the expected result. While another lane is editing the plan, send the integrator your row update.
 
 ### What stays strict
 - Never break the demo path on main. If it breaks, fixing it comes before everything else.

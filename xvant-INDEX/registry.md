@@ -37,7 +37,7 @@
 | xvant-docs | gstack document-generate | document-release, make-pdf, landing-report, edit-article |
 | xvant-second-brain | second-brain | obsidian-vault reference |
 | xvant-study | anthropic grill-me | grill-with-docs, gstack learn |
-| xvant-handoff | gstack context-save/restore + custom 13-section spec | machine-facing; links to retro, no reflection dup |
+| xvant-handoff | gstack context-save/restore + custom 13-section spec | next-agent prompt with required reading, a verifiable milestone and model assignments; links to retro |
 | xvant-repo-guard | anthropic git-guardrails | setup-pre-commit, gstack careful/guard/redact |
 | xvant-prototype | anthropic prototype | (throwaway; relaxes TDD) |
 | xvant-hackathon | original (field notes from two 36-hour builds) | modes: prep, submit; overrides plan / tdd / verify until submission; reuses `_shared/parallel-dispatch.md` |
@@ -46,7 +46,7 @@
 | xvant-schedule | built-in schedule | built-in loop |
 | xvant-caveman | built-in caveman (full/ultra) | escalates the lite baseline |
 
-`_shared/` references (no trigger): `ascii-diagram.md` (◆ flow diagram) · `diff-digest.md` (read-diff-once pre-pass) · `parallel-dispatch.md` (fan-out helper). The last two are shared by `xvant-review` swarm + `xvant-execute`.
+`_shared/` references (no trigger): `ascii-diagram.md` (◆ flow diagram) · `diff-digest.md` (read-diff-once pre-pass) · `parallel-dispatch.md` (main-plan task assignment, worker checkoff and integration). The review swarm uses the digest and the read-only dispatch path.
 
 ## Collisions resolved
 - **End-of-task pile** (verify/review/security/simplify all fired on "done"): `xvant-verify` is the sole "done" trigger and sequences the other three; those three are explicit-invoke only.

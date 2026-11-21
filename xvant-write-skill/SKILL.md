@@ -3,7 +3,7 @@ name: xvant-write-skill
 description: "Use when creating, editing, scaffolding or testing a skill or SKILL.md, including skillify exports."
 ---
 
-For new skills and edits, run a pressure scenario with a subagent without the skill. Capture the failure and verbatim rationalizations. Write the smallest instruction that addresses them; rerun with the skill, verify compliance and close loopholes.
+For new skills and edits, run a pressure scenario with a subagent without the skill. Track the baseline and rerun as separate task IDs per `~/.claude/skills/_shared/parallel-dispatch.md`. Keep the baseline worker blind to the proposed skill and expected answer. Capture the failure and verbatim rationalizations. Write the smallest instruction that addresses them; rerun with the skill, verify compliance and close loopholes.
 
 Frontmatter: name (letters, numbers, hyphens) and description under 1024 characters total. Describe when to use it in third person, starting “Use when”. Include distinct trigger words; mark explicit-only skills accordingly. Keep workflow in the body. Use one strong example, references for detail, diagrams only for non-obvious decisions, and red flags/rationalizations for discipline skills.
 
